@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'drawer.dart';
+
+
 void main() {
   runApp(const MyApp());
 }
@@ -15,47 +18,64 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MyhomePage(),
+      home: const MyHomePage(),
     );
   }
 }
-class MyhomePage extends StatefulWidget {
-  const MyhomePage({super.key});
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
 
   @override
-  State<MyhomePage> createState() => _MyhomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyhomePageState extends State<MyhomePage> {
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
         title: const Text("안녕하세요")
-      ),
-      body: Container(
-        alignment: Alignment.center,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width / 2,
-                  height: 200,
-                  color: Colors.blue,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width / 2,
-                  height: 200,
-                  color: Colors.red,
-                )
-              ],
+    ),
+        drawer: const MyDrawer(),
+        body: Container(
+            alignment: Alignment.center,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width / 2,
+                        height: 200,
+                        color: Colors.blue,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width / 2,
+                        height: 200,
+                        color: Colors.red,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width / 2,
+                        height: 200,
+                        color: Colors.green,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width / 2,
+                        height: 200,
+                        color: Colors.yellow,
+                      ),
+                    ],
+                  ),
+                ]
             )
-          ],
-        ),
-      )
+        )
     );
   }
 }
