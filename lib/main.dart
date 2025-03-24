@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello/Setting_Page.dart';
 
 import 'drawer.dart';
 
@@ -18,7 +19,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MyHomePage(),
+      initialRoute: "/",
+      routes: {
+        "/": (context) => const MyHomePage(),
+        "/setting": (context) => const SettingPage()
+      },
     );
   }
 }
