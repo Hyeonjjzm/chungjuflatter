@@ -3,6 +3,7 @@ import 'package:hello/Setting_Page.dart';
 import 'package:hello/button_page.dart';
 import 'package:hello/flex_page.dart';
 import 'package:hello/image.dart';
+import 'package:hello/input_page.dart';
 import 'package:hello/layout_page.dart';
 import 'package:hello/popup_page.dart';
 
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
         "/popup": (context) => const PopupPage(),
         "/flex": (context) => const FlexPage(),
         "/image": (context) => const imagePage(),
-        "/button": (context) => const ButtonPage()
+        "/button": (context) => const ButtonPage(),
+        "/input": (context) => const InputPage()
 
       },
     );

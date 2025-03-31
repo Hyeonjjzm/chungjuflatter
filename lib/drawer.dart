@@ -68,13 +68,13 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
               leading: const Icon(Icons.ads_click),
-              title: const Text('button 예제'),
+              title: const Text('이름 입력 예제'),
               onTap: () {
                 Navigator.pushNamed(
-                    context, "/button"
+                    context, "/input"
                 );
               }
-          )
+          ),
         ],
       ),
     );
