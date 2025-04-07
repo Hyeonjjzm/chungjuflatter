@@ -1,21 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ListPage extends StatefulWidget {
   const ListPage({super.key});
-
   @override
   State<ListPage> createState() => _ListPageState();
 }
 
 class _ListPageState extends State<ListPage> {
-
-  final List<String> fruits = [];
+  List<String> fruits = [];
   final TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadFruits();
+  }
+
+  void _loadFruits() async {
+    final prefs = await SharedPreferences.getInstance();
+    final saveData = prefs.getStringList("fruits");
+    if (saveData != null) {
+      setState(() {
+        fruits = saveData;
+      });
+    }
+  }
+
+  void _saveFruits() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList("fruits", fruits);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("LIst 예제"),
+          title: const Text("List 예제"),
         ),
         body: Column(
           children: [
@@ -41,8 +63,8 @@ class _ListPageState extends State<ListPage> {
                             fruits.add(text);
                             _controller.clear();
                           });
+                          _saveFruits();
                         }
-
                       },
                       child: const Text("추가")
                   )
@@ -85,6 +107,7 @@ class _ListPageState extends State<ListPage> {
                                         setState(() {
                                           fruits[index] = newText;
                                         });
+                                        _saveFruits();
                                       }
                                       Navigator.pop(context);
                                     },
@@ -95,15 +118,15 @@ class _ListPageState extends State<ListPage> {
                             }
                         );
                       },
-                      onLongPress: (){
+                      onLongPress: () {
                         final deletedItem = fruits[index];
                         setState(() {
                           fruits.removeAt(index);
                         });
+                        _saveFruits();
 
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text('$deletedItem를 삭제함!')));
-
                       },
                     );
                   }
