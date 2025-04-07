@@ -47,11 +47,20 @@ class _ListPageState extends State<ListPage> {
                 children: [
                   Expanded(
                       child: TextField(
-                        controller: _controller,
-                        decoration: const InputDecoration(
-                            hintText: "아이템 입력",
-                            border: OutlineInputBorder()
-                        ),
+                          controller: _controller,
+                          decoration: const InputDecoration(
+                              hintText: "아이템 입력", border: OutlineInputBorder()
+                          ),
+                          onSubmitted: (value) {
+                            final text = value.trim();
+                            if (text.isNotEmpty) {
+                              setState(() {
+                                fruits.add(text);
+                                _controller.clear();
+                              });
+                              _saveFruits();
+                            }
+                          }
                       )
                   ),
                   const SizedBox(width: 10),
