@@ -83,7 +83,16 @@ class MyDrawer extends StatelessWidget {
                     context, "/List"
                 );
               }
-          )
+          ),
+          ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('투두'),
+              onTap: () {
+                Navigator.pushNamed(
+                    context, "/to-do"
+                );
+              }
+          ),
         ],
       ),
     );
