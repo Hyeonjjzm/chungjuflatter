@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TodoPage extends StatefulWidget {
   const TodoPage({super.key});
@@ -12,6 +13,29 @@ class _TodoPageState extends State<TodoPage> {
   final List<String> todos = [];
   final TextEditingController _controller = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+    _loadTodos();
+
+  }
+
+  void _loadTodos() async {
+    final prefs = await SharedPreferences.getInstance();
+    final saved = prefs.getStringList("todos");
+    if(saved != null){
+      setState(() {
+        todos.addAll(saved);
+      });
+    }
+  }
+
+  void _saveTodos() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('todos', todos);
+  }
+
+
 
   void _addTodo(String text) {
     if (text.trim().isEmpty) return;
@@ -20,7 +44,7 @@ class _TodoPageState extends State<TodoPage> {
       todos.add(text.trim());
       _controller.clear();
     });
-
+    _saveTodos();
   }
 
   @override
